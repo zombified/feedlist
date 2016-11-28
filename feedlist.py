@@ -14,6 +14,7 @@ FEEDS_TO_PULL = [
     ('fortress of doors', 'http://www.fortressofdoors.com/rss/',),
     ('skial bainn', 'http://blog.skialbainn.com/rss',),
     ('rust lang', 'https://blog.rust-lang.org/',),
+    ('wildcard corp', 'https://www.wildcardcorp.com/blog/rss.xml',),
 ]
 
 STYLE = """
@@ -85,7 +86,7 @@ li {
 
 
 def sortitem(val):
-    return int("{}{}{}{}{}".format(val[4][0], val[4][1], val[4][2], val[4][3], val[4][4]))
+    return int("{:0>4d}{:0>2d}{:0>2d}{:0>2d}{:0>2d}".format(val[4][0], val[4][1], val[4][2], val[4][3], val[4][4]))
 
 
 def get_items():
@@ -100,6 +101,7 @@ def get_items():
             feedlink = parsed.feed.link
         except:
             feedlink = feed[1]
+        feeditems = []
         for item in parsed.entries:
             entrytitle = item.title
             entrylink = item.link
@@ -108,7 +110,9 @@ def get_items():
             except:
                 entrydate = item.updated_parsed
 
-            items.append([feedtitle, feedlink, entrytitle, entrylink, entrydate])
+            feeditems.append([feedtitle, feedlink, entrytitle, entrylink, entrydate])
+        feeditems.sort(key=sortitem, reverse=True)
+        items += feeditems[:15]
     return sorted(items, key=sortitem, reverse=True)
 
 

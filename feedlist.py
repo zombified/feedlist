@@ -3,18 +3,19 @@ import feedparser
 OUTPUT_PATH = "feeds.html"
 
 FEEDS_TO_PULL = [
-    ('joel kleier', 'https://joelkleier.com/rss.xml',),
-    ('gurney journey', 'http://feeds.feedburner.com/blogspot/NVaYV?format=xml',),
-    ('nathan vangheem', 'https://www.nathanvangheem.com/feeds/posts/rss.xml',),
-    ('fastmail', 'https://blog.fastmail.com/feed/',),
-    ('lost decade games', 'http://www.lostdecadegames.com/rss.xml',),
-    ('tested', 'http://www.tested.com/feeds/',),
-    ('pollocks host file', 'http://someonewhocares.org/hosts/rss.xml',),
-    ('raspberry pi', 'https://www.raspberrypi.org/feed/',),
-    ('fortress of doors', 'http://www.fortressofdoors.com/rss/',),
-    ('skial bainn', 'http://blog.skialbainn.com/rss',),
-    ('rust lang', 'https://blog.rust-lang.org/',),
-    ('wildcard corp', 'https://www.wildcardcorp.com/blog/rss.xml',),
+    ('fastmail', 'https://blog.fastmail.com/feed/', False),
+    ('fortress of doors', 'http://www.fortressofdoors.com/rss/', False),
+    ('gamedev treasure', 'http://www.gamedevtreasure.com/rss.xml', False),
+    ('gurney journey', 'http://feeds.feedburner.com/blogspot/NVaYV?format=xml', False),
+    ('joel kleier', 'https://joelkleier.com/rss.xml', False),
+    ('lost decade games', 'http://www.lostdecadegames.com/rss.xml', False),
+    ('nathan vangheem', 'https://www.nathanvangheem.com/feeds/posts/rss.xml', True),
+    ('pollocks host file', 'http://someonewhocares.org/hosts/rss.xml', False),
+    ('raspberry pi', 'https://www.raspberrypi.org/feed/', False),
+    ('rust lang', 'https://blog.rust-lang.org/', False),
+    ('skial bainn', 'http://blog.skialbainn.com/rss', False),
+    ('tested', 'http://www.tested.com/feeds/', False),
+    ('wildcard corp', 'https://www.wildcardcorp.com/blog/rss.xml', True),
 ]
 
 STYLE = """
@@ -94,13 +95,18 @@ def get_items():
     for feed in FEEDS_TO_PULL:
         parsed = feedparser.parse(feed[1])
         try:
-            feedtitle = parsed.feed.title
+            if not feed[2]:
+                feedtitle = parsed.feed.title
+            else:
+                feedtitle = feed[0]
         except:
             feedtitle = feed[0]
+
         try:
             feedlink = parsed.feed.link
         except:
             feedlink = feed[1]
+
         feeditems = []
         for item in parsed.entries:
             entrytitle = item.title
@@ -125,3 +131,4 @@ with open(OUTPUT_PATH, 'w') as feedout:
             item[4][0], item[4][1], item[4][2],
             item[1], item[0]))
     feedout.write("</ul></body></html>")
+

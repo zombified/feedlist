@@ -12,6 +12,7 @@ FEEDS_TO_PULL = [
     ('nathan vangheem', 'https://www.nathanvangheem.com/feeds/posts/rss.xml', True),
     ('pollocks host file', 'http://someonewhocares.org/hosts/rss.xml', False),
     ('raspberry pi', 'https://www.raspberrypi.org/feed/', False),
+    ('rocket.chat github tags', 'https://github.com/RocketChat/Rocket.Chat/tags.atom', True),
     ('rust lang', 'https://blog.rust-lang.org/', False),
     ('skial bainn', 'http://blog.skialbainn.com/rss', False),
     ('tested', 'http://www.tested.com/feeds/', False),

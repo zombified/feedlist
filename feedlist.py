@@ -18,6 +18,7 @@ FEEDS_TO_PULL = [
     ('tested', 'http://www.tested.com/feeds/', False),
     ('wildcard corp', 'https://www.wildcardcorp.com/blog/rss.xml', True),
     ('nixos weekly', 'http://weekly.nixos.org/feeds/all.rss.xml', False),
+    ('webupd8', 'http://feeds.feedburner.com/webupd8?format=xml', True),
 ]
 
 STYLE = """

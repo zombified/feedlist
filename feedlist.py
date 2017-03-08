@@ -19,6 +19,7 @@ FEEDS_TO_PULL = [
     ('wildcard corp', 'https://www.wildcardcorp.com/blog/rss.xml', True),
     ('nixos weekly', 'http://weekly.nixos.org/feeds/all.rss.xml', False),
     ('webupd8', 'http://feeds.feedburner.com/webupd8?format=xml', True),
+    ('terminator', 'https://gnometerminator.blogspot.com/feeds/posts/default?alt=rss', True),
 ]
 
 STYLE = """
